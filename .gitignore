@@ -1,0 +1,9 @@
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de configuración de VS Code (opcional, pero recomendado)
+.vscode/
+
+# Ignorar base de datos (más adelante definiremos esto mejor)
+db_data/
