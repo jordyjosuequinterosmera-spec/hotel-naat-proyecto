@@ -7,3 +7,14 @@ Thumbs.db
 
 # Ignorar base de datos (más adelante definiremos esto mejor)
 db_data/
+
+# Dependencias de Node
+node_modules/
+
+# Variables de entorno
+.env
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+.vscode/
