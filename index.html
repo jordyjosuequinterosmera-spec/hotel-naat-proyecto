@@ -1,134 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotel NAAT - Tu Descanso Perfecto</title>
-    
-    <!-- Enlazamos la fuente principal (Google Fonts) para un toque moderno -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- Enlazamos nuestro archivo de estilos CSS -->
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
 
+    <!-- Enlazamos la fuente principal (Google Fonts) para un toque moderno -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Enlazamos nuestro archivo de estilos CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
     <!-- CABECERA: Contiene el logo y el menú de navegación (Header) -->
     <header class="main-header">
-        <div class="container header-container">
-            <div class="logo-area">
-                <!-- Usaremos el logo generado en el Paso 1 -->
-                <img src="assets/icons/logo-naat.png" alt="Logo Hotel NAAT" class="main-logo">
-            </div>
-            
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#" class="active">inicio</a></li>
-                    <li><a href="#">habitaciones</a></li>
-                    <li><a href="#">eventos</a></li>
-                    <li><a href="#">contáctanos</a></li>
-                    <li><a href="#">administrativo</a></li>
-                </ul>
-            </nav>
+      <div class="container header-container">
+        <div class="logo-area">
+          <!-- Usaremos el logo generado en el Paso 1 -->
+          <img
+            src="assets/icons/logo-naat.png"
+            alt="Logo Hotel NAAT"
+            class="main-logo"
+          />
         </div>
+
+        <nav class="main-nav">
+          <ul>
+            <li><a href="#" class="active">inicio</a></li>
+            <li><a href="#">habitaciones</a></li>
+            <li><a href="#">eventos</a></li>
+            <li><a href="#">contáctanos</a></li>
+            <li><a href="#">administrativo</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <!-- HÉROE / TÍTULO PRINCIPAL (Como el texto grande del prototipo) -->
     <section class="hero-section">
-        <div class="container hero-container">
-            <h1 class="hotel-title">Hotel NAAT</h1>
-        </div>
+      <div class="container hero-container">
+        <h1 class="hotel-title">Hotel NAAT</h1>
+      </div>
     </section>
 
     <!-- SECCIÓN DE RESERVA (La barra de inputs) -->
     <section class="booking-section">
-        <div class="container booking-container">
-            <form action="#" class="booking-form">
-                
-                <div class="input-group text-input">
-                    <label>registrarse</label>
-                    <input type="date" name="check-in">
-                </div>
+      <div class="container booking-container">
+        <form action="#" class="booking-form">
+          <div class="input-group text-input">
+            <label>registrarse</label>
+            <input type="date" name="check-in" />
+          </div>
 
-                <div class="input-group">
-                    <select name="adults">
-                        <option value="" disabled selected>adultos</option>
-                        <option value="1">1 Adulto</option>
-                        <option value="2">2 Adultos</option>
-                        <option value="3">3+ Adultos</option>
-                    </select>
-                </div>
+          <div class="input-group">
+            <select name="adults">
+              <option value="" disabled selected>adultos</option>
+              <option value="1">1 Adulto</option>
+              <option value="2">2 Adultos</option>
+              <option value="3">3+ Adultos</option>
+            </select>
+          </div>
 
-                <div class="input-group">
-                    <select name="children">
-                        <option value="" disabled selected>niños</option>
-                        <option value="0">Sin Niños</option>
-                        <option value="1">1 Niño</option>
-                        <option value="2">2+ Niños</option>
-                    </select>
-                </div>
+          <div class="input-group">
+            <select name="children">
+              <option value="" disabled selected>niños</option>
+              <option value="0">Sin Niños</option>
+              <option value="1">1 Niño</option>
+              <option value="2">2+ Niños</option>
+            </select>
+          </div>
 
-                <button type="submit" class="btn-reservar">reservar ahora</button>
-            </form>
-        </div>
+          <button type="submit" class="btn-reservar">reservar ahora</button>
+        </form>
+      </div>
     </section>
 
-    <!-- SECCIÓN DE HABITACIONES (La cuadrícula "imagenes habitaciones") -->
+    <!-- SECCIÓN DE HABITACIONES -->
     <section class="rooms-grid-section">
-        <div class="container rooms-container">
-            <h2 class="section-subtitle">Descubre Nuestras Habitaciones</h2>
-            <div class="rooms-grid">
-                <!-- Por ahora son cajas vacías esperando imágenes de alta calidad -->
-                <div class="room-card placeholder-card">
-                    <div class="card-image-wrapper">
-                        <!-- Aquí irá una imagen generada más adelante -->
-                        <div class="image-placeholder">Cargando habitación 1...</div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Habitación Estándar</h3>
-                    </div>
-                </div>
-                <div class="room-card placeholder-card">
-                    <div class="card-image-wrapper">
-                        <div class="image-placeholder">Cargando habitación 2...</div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Suite Ejecutiva</h3>
-                    </div>
-                </div>
-                <div class="room-card placeholder-card">
-                    <div class="card-image-wrapper">
-                        <div class="image-placeholder">Cargando habitación 3...</div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Suite Familiar con Vista</h3>
-                    </div>
-                </div>
+      <div class="container rooms-container">
+        <h2 class="section-subtitle">Descubre Nuestras Habitaciones</h2>
+        <div class="rooms-grid">
+          <div class="room-card">
+            <div class="card-image-wrapper">
+              <img
+                src="images/rooms/habitacion-estandar.jpg"
+                alt="Habitación Estándar Hotel NAAT"
+              />
             </div>
+            <div class="card-content">
+              <h3>Habitación Estándar</h3>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="card-image-wrapper">
+              <img
+                src="images/rooms/suite-ejecutiva.jpg"
+                alt="Suite Ejecutiva Hotel NAAT"
+              />
+            </div>
+            <div class="card-content">
+              <h3>Suite Ejecutiva</h3>
+            </div>
+          </div>
+
+          <div class="room-card">
+            <div class="card-image-wrapper">
+              <img
+                src="images/rooms/suite-familiar.jpg"
+                alt="Suite Familiar Hotel NAAT"
+              />
+            </div>
+            <div class="card-content">
+              <h3>Suite Familiar con Vista</h3>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- PIE DE PÁGINA (Footer) -->
     <footer class="main-footer">
-        <div class="container footer-container">
-            
-            <div class="footer-info info-address">
-                <h3>dirección</h3>
-                <p>calle ....... frente a ...... guayas - ecuador</p>
-            </div>
-
-            <div class="footer-info info-contact">
-                <h3>correo</h3>
-                <p><a href="mailto:hotel.NAATec@gmail.com">hotel.NAATec@gmail.com</a></p>
-            </div>
-
+      <div class="container footer-container">
+        <div class="footer-info info-address">
+          <h3>dirección</h3>
+          <p>calle ....... frente a ...... guayas - ecuador</p>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Hotel NAAT. Todos los derechos reservados.</p>
+
+        <div class="footer-info info-contact">
+          <h3>correo</h3>
+          <p>
+            <a href="mailto:hotel.NAATec@gmail.com">hotel.NAATec@gmail.com</a>
+          </p>
         </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Hotel NAAT. Todos los derechos reservados.</p>
+      </div>
     </footer>
 
     <!-- Enlazamos nuestro archivo de JavaScript al final -->
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
