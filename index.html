@@ -141,6 +141,46 @@
         <p>&copy; 2023 Hotel NAAT. Todos los derechos reservados.</p>
       </div>
     </footer>
+    <!-- MODAL DE LOGIN / REGISTRO -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="tabs">
+                <button id="tab-login" class="active">Iniciar Sesión</button>
+                <button id="tab-register">Registrarse</button>
+            </div>
+
+            <!-- Formulario de Login -->
+            <form id="form-login" class="auth-form">
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-reservar">Ingresar</button>
+            </form>
+
+            <!-- Formulario de Registro -->
+            <form id="form-register" class="auth-form hidden">
+                <div class="input-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="reg-nombre" required>
+                </div>
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <button type="submit" class="btn-reservar">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
 
     <!-- Enlazamos nuestro archivo de JavaScript al final -->
     <script src="js/main.js"></script>

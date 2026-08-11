@@ -4,7 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 
 const db = require('./config/db');
-const reservasRouter = require('./routes/reservas'); // <--- NUEVO
+const reservasRouter = require('./routes/reservas');
+const authRouter = require('./routes/auth'); // <--- NUEVO
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +16,8 @@ app.use(express.json());
 app.use(express.static('.'));
 
 // Rutas API
-app.use('/api/reservas', reservasRouter); // <--- NUEVO
+app.use('/api/reservas', reservasRouter);
+app.use('/api/auth', authRouter); // <--- NUEVO
 
 app.get('/api/habitaciones', async (req, res) => {
     try {
