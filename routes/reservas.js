@@ -62,4 +62,27 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Endpoint para cambiar el estado de una reserva (para el panel admin)
+router.patch('/:id/estado', async (req, res) => {
+    const { id } = req.params;
+    const { estado } = req.body;
+
+    if (!['confirmada', 'cancelada', 'completada'].includes(estado)) {
+        return res.status(400).json({ success: false, message: 'Estado no válido.' });
+    }
+
+    try {
+        const [result] = await db.query('UPDATE reservas SET estado = ? WHERE id = ?', [estado, id]);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: 'Reserva no encontrada.' });
+        }
+
+        res.json({ success: true, message: 'Estado actualizado correctamente.' });
+    } catch (error) {
+        console.error('Error al actualizar estado:', error);
+        res.status(500).json({ success: false, message: 'Error en la base de datos.' });
+    }
+});
+
 module.exports = router;

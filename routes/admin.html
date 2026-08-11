@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel NAAT - Panel de Administración</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .admin-table th, .admin-table td {
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            text-align: left;
+        }
+        .admin-table th {
+            background-color: #0088cc;
+            color: #fff;
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .badge-confirmada { background: #e3f2fd; color: #1976d2; }
+        .badge-cancelada { background: #ffebee; color: #c62828; }
+        .badge-completada { background: #e8f5e9; color: #2e7d32; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="logo">NAAT <span>Panel Admin</span></h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Volver a la Web</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <h2>Gestión de Reservas</h2>
+        <p style="color: #666; margin-bottom: 20px;">Listado actualizado de reservas almacenadas en MySQL.</p>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Habitación</th>
+                    <th>Check-In</th>
+                    <th>Huéspedes</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-reservas">
+                <tr>
+                    <td colspan="7" style="text-align: center;">Cargando reservas...</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', cargarTablaReservas);
+
+        async function cargarTablaReservas() {
+            const tbody = document.getElementById('tabla-reservas');
+            try {
+                const res = await fetch('/api/reservas');
+                const data = await res.json();
+
+                if (data.success && data.data.length > 0) {
+                    tbody.innerHTML = '';
+                    data.data.forEach(r => {
+                        const tr = document.createElement('tr');
+                        const fecha = new Date(r.fecha_checkin).toISOString().split('T')[0];
+                        
+                        tr.innerHTML = `
+                            <td>#${r.id}</td>
+                            <td>${r.usuario ? r.usuario : '<em>Anónimo / Invitado</em>'}</td>
+                            <td>${r.habitacion || 'Estándar'}</td>
+                            <td>${fecha}</td>
+                            <td>${r.adultos} Ad. / ${r.ninos} Niñ.</td>
+                            <td><span class="badge badge-${r.estado}">${r.estado}</span></td>
+                            <td>
+                                ${r.estado === 'confirmada' ? `
+                                    <button onclick="cambiarEstado(${r.id}, 'completada')" style="background:#28a745; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;">Finalizar</button>
+                                    <button onclick="cambiarEstado(${r.id}, 'cancelada')" style="background:#dc3545; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; margin-left:4px;">Cancelar</button>
+                                ` : '-'}
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No hay reservas registradas.</td></tr>';
+                }
+            } catch (err) {
+                console.error('Error al cargar la tabla:', err);
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Error al cargar datos desde la API.</td></tr>';
+            }
+        }
+
+        async function cambiarEstado(id, nuevoEstado) {
+            if (!confirm(`¿Estás seguro de cambiar el estado de la reserva #${id} a "${nuevoEstado}"?`)) return;
+
+            try {
+                const res = await fetch(`/api/reservas/${id}/estado`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ estado: nuevoEstado })
+                });
+
+                const data = await res.json();
+                if (data.success) {
+                    cargarTablaReservas();
+                } else {
+                    alert('Error al actualizar: ' + data.message);
+                }
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        }
+    </script>
+</body>
+</html>
