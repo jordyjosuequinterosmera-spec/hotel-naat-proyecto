@@ -5,9 +5,8 @@ const db = require('../config/db');
 
 // Endpoint para registrar una nueva reserva
 router.post('/', async (req, res) => {
-    const { fecha_checkin, adultos, ninos, habitacion_id } = req.body;
+    const { fecha_checkin, adultos, ninos, habitacion_id, usuario_id } = req.body;
 
-    // Validación básica de campos requeridos
     if (!fecha_checkin || !adultos) {
         return res.status(400).json({ 
             success: false, 
@@ -16,15 +15,20 @@ router.post('/', async (req, res) => {
     }
 
     try {
-        // Por defecto asignamos habitacion_id = 1 si el usuario no seleccionó una específica aún
         const roomSelected = habitacion_id || 1;
 
         const query = `
-            INSERT INTO reservas (fecha_checkin, adultos, ninos, habitacion_id, estado)
-            VALUES (?, ?, ?, ?, 'confirmada')
+            INSERT INTO reservas (fecha_checkin, adultos, ninos, habitacion_id, usuario_id, estado)
+            VALUES (?, ?, ?, ?, ?, 'confirmada')
         `;
 
-        const [result] = await db.query(query, [fecha_checkin, adultos, ninos || 0, roomSelected]);
+        const [result] = await db.query(query, [
+            fecha_checkin, 
+            adultos, 
+            ninos || 0, 
+            roomSelected, 
+            usuario_id || null
+        ]);
 
         res.status(201).json({
             success: true,
@@ -40,13 +44,14 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Endpoint para listar todas las reservas (para panel administrativo futuro)
+// Endpoint para listar todas las reservas
 router.get('/', async (req, res) => {
     try {
         const query = `
-            SELECT r.id, r.fecha_checkin, r.adultos, r.ninos, r.estado, h.nombre AS habitacion
+            SELECT r.id, r.fecha_checkin, r.adultos, r.ninos, r.estado, h.nombre AS habitacion, u.nombre AS usuario
             FROM reservas r
             LEFT JOIN habitaciones h ON r.habitacion_id = h.id
+            LEFT JOIN usuarios u ON r.usuario_id = u.id
             ORDER BY r.creado_en DESC
         `;
         const [rows] = await db.query(query);
