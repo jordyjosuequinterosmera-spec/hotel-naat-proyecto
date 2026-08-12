@@ -58,3 +58,15 @@ INSERT INTO eventos (nombre, descripcion, capacidad, precio_estimado, imagen_url
 ('Bodas y Celebraciones', 'Espacios al aire libre y salones elegantes equipados para crear momentos inolvidables.', 150, 500.00, 'assets/images/boda.jpg'),
 ('Conferencias y Negocios', 'Salones ejecutivos con equipos audiovisuales, pantalla gigante y servicio de catering profesional.', 80, 300.00, 'assets/images/conferencia.jpg'),
 ('Eventos Sociales y Cumpleaños', 'Piscina y área de jardín perfectas para reuniones familiares, cumpleaños y fiestas privadas.', 100, 250.00, 'assets/images/fiesta.jpg');
+
+
+--tabla xontactos
+CREATE TABLE IF NOT EXISTS contactos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombres VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(20),
+    comentarios TEXT NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

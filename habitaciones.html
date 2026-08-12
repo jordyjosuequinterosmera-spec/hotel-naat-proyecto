@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel NAAT - Habitaciones</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos específicos para la navegación por pestañas de habitaciones */
+        .category-nav {
+            display: flex;
+            justify-content: flex-start;
+            gap: 25px;
+            max-width: 1100px;
+            margin: 30px auto 20px auto;
+            padding: 0 20px;
+            border-bottom: 2px solid #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 500;
+            padding-bottom: 10px;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .category-link:hover,
+        .category-link.active {
+            color: #0088cc;
+            border-bottom-color: #0088cc;
+            font-weight: bold;
+        }
+
+        /* Grid de Habitaciones */
+        .rooms-grid-section {
+            max-width: 1100px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .room-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #e5e5e5;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .room-image-wrapper {
+            width: 100%;
+            height: 220px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        .room-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .room-details h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .room-details p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .room-footer-card {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .room-price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .btn-card-reservar {
+            background-color: #0088cc;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .btn-card-reservar:hover {
+            background-color: #006699;
+        }
+
+        @media (max-width: 900px) {
+            .rooms-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / LOGO Y NAVEGACIÓN -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <img src="assets/images/logo.png" alt="Logo Hotel NAAT" class="logo-img" onerror="this.style.display='none'">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">inicio</a></li>
+                    <li><a href="habitaciones.html" class="active" style="color: #0088cc; font-weight: bold;">habitaciones</a></li>
+                    <li><a href="eventos.html">eventos</a></li>
+                    <li><a href="contactanos.html">contactanos</a></li>
+                    <li><a href="admin.html">administrativo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- TÍTULO PRINCIPAL (Hotel NAAT en verde como el boceto) -->
+    <section class="hero-section">
+        <h1 class="hero-title" style="color: #28a745;">Hotel NAAT</h1>
+    </section>
+
+    <!-- BARRA SUPERIOR DE RESERVA -->
+    <section class="booking-bar-section">
+        <div class="booking-container">
+            <form class="booking-form" action="index.html" method="GET">
+                <div class="form-group">
+                    <label for="check-in">registrarse</label>
+                    <input type="date" id="check-in" name="check-in" required>
+                </div>
+
+                <div class="form-group">
+                    <select name="adults" id="adults" required>
+                        <option value="" disabled selected>adultos</option>
+                        <option value="1">1 Adulto</option>
+                        <option value="2">2 Adultos</option>
+                        <option value="3">3 Adultos</option>
+                        <option value="4">4 Adultos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select name="children" id="children">
+                        <option value="0" selected>niños</option>
+                        <option value="1">1 Niño</option>
+                        <option value="2">2 Niños</option>
+                        <option value="3">3 Niños</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-reservar">reservar ahora</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- CATEGORÍAS / PESTAÑAS (Filtro interactivo) -->
+    <nav class="category-nav">
+        <a class="category-link active" onclick="filtrarHabitaciones('todas', this)">todas</a>
+        <a class="category-link" onclick="filtrarHabitaciones('individual', this)">habitaciones individuales</a>
+        <a class="category-link" onclick="filtrarHabitaciones('doble', this)">habitaciones doble</a>
+        <a class="category-link" onclick="filtrarHabitaciones('matrimonial', this)">habitaciones matrimoniales</a>
+        <a class="category-link" onclick="filtrarHabitaciones('suite', this)">suits lujosas</a>
+    </nav>
+
+    <!-- GRID DE HABITACIONES -->
+    <main class="rooms-grid-section">
+        <div class="rooms-grid" id="rooms-container">
+
+            <!-- Individual -->
+            <div class="room-card" data-category="individual">
+                <div class="room-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80" alt="Habitación Individual Estándar">
+                </div>
+                <div class="room-details">
+                    <h3>Habitación Individual Standard</h3>
+                    <p>Espacio acogedor ideal para viajeros de negocios. Incluye cama individual, escritorio y Wi-Fi de alta velocidad.</p>
+                    <div class="room-footer-card">
+                        <span class="room-price">$45 / noche</span>
+                        <a href="index.html#booking-bar" class="btn-card-reservar">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doble -->
+            <div class="room-card" data-category="doble">
+                <div class="room-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80" alt="Habitación Doble">
+                </div>
+                <div class="room-details">
+                    <h3>Habitación Doble Twin</h3>
+                    <p>Perfecta para amigos o colegas. Equipada con dos camas individuales, aire acondicionado y TV HD.</p>
+                    <div class="room-footer-card">
+                        <span class="room-price">$70 / noche</span>
+                        <a href="index.html#booking-bar" class="btn-card-reservar">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matrimonial -->
+            <div class="room-card" data-category="matrimonial">
+                <div class="room-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80" alt="Habitación Matrimonial">
+                </div>
+                <div class="room-details">
+                    <h3>Habitación Matrimonial Executive</h3>
+                    <p>Cama Queen Size, balcón privado con vista y baño completo con amenidades exclusivas para parejas.</p>
+                    <div class="room-footer-card">
+                        <span class="room-price">$95 / noche</span>
+                        <a href="index.html#booking-bar" class="btn-card-reservar">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suite Lujosa -->
+            <div class="room-card" data-category="suite">
+                <div class="room-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80" alt="Suite Lujosa NAAT">
+                </div>
+                <div class="room-details">
+                    <h3>Suite Lujosa Presidential</h3>
+                    <p>La experiencia de mayor confort. Cama King, sala de estar independiente, jacuzzi y servicio a la habitación 24/7.</p>
+                    <div class="room-footer-card">
+                        <span class="room-price">$160 / noche</span>
+                        <a href="index.html#booking-bar" class="btn-card-reservar">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doble Deluxe -->
+            <div class="room-card" data-category="doble">
+                <div class="room-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80" alt="Habitación Doble Deluxe">
+                </div>
+                <div class="room-details">
+                    <h3>Habitación Doble Deluxe</h3>
+                    <p>Espaciosa habitación con 2 camas dobles, área de minibar y vista a los jardines.</p>
+                    <div class="room-footer-card">
+                        <span class="room-price">$85 / noche</span>
+                        <a href="index.html#booking-bar" class="btn-card-reservar">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matrimonial Premium -->
+            <div class="room-card" data-category="matrimonial">
+                <div class="room-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80" alt="Suite Matrimonial Premium">
+                </div>
+                <div class="room-details">
+                    <h3>Matrimonial Premium King</h3>
+                    <p>Amplio espacio con cama King Size, iluminación ambiental y desayuno incluido.</p>
+                    <div class="room-footer-card">
+                        <span class="room-price">$110 / noche</span>
+                        <a href="index.html#booking-bar" class="btn-card-reservar">Reservar</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h4>direccion</h4>
+                <p>calle ....... frente a ...... guayas - ecuador</p>
+            </div>
+            <div class="footer-info">
+                <h4>correo</h4>
+                <p>Hotel.NAATec.@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT DE FILTRADO POR PESTAÑAS -->
+    <script>
+        function filtrarHabitaciones(categoria, el) {
+            // Actualizar clase activa en pestañas
+            const links = document.querySelectorAll('.category-link');
+            links.forEach(l => l.classList.remove('active'));
+            el.classList.add('active');
+
+            // Mostrar/ocultar tarjetas
+            const tarjetas = document.querySelectorAll('.room-card');
+            tarjetas.forEach(card => {
+                if (categoria === 'todas' || card.getAttribute('data-category') === categoria) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

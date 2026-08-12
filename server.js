@@ -14,6 +14,10 @@ const PORT = process.env.PORT || 3000;
 const eventosRouter = require('./routes/eventos');
 app.use('/api/eventos', eventosRouter);
 
+// server.js (añadir con las demás rutas)
+const contactosRouter = require('./routes/contactos');
+app.use('/api/contactos', contactosRouter);
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
