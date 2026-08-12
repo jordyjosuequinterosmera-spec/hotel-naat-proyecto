@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel NAAT - Eventos</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos específicos para la sección de eventos */
+        .events-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .events-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .events-intro h2 {
+            font-size: 2.2rem;
+            color: #0088cc;
+            margin-bottom: 10px;
+        }
+
+        .events-intro p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .event-content {
+            padding: 20px;
+        }
+
+        .event-content h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .event-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            color: #0088cc;
+            font-weight: 600;
+        }
+
+        .btn-cotizar {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .btn-cotizar:hover {
+            background-color: #006699;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGO Y NAVEGACIÓN -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <img src="assets/images/logo.png" alt="Hotel NAAT Logo" class="logo-img" onerror="this.style.display='none'">
+                <h1 class="logo-text">Hotel NAAT</h1>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">inicio</a></li>
+                    <li><a href="index.html#habitaciones">habitaciones</a></li>
+                    <li><a href="eventos.html" class="active" style="color: #0088cc; font-weight: bold;">eventos</a></li>
+                    <li><a href="contactanos.html">contactanos</a></li>
+                    <li><a href="admin.html">administrativo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- BARRA SUPERIOR DE RESERVA -->
+    <section class="booking-bar-section">
+        <div class="booking-container">
+            <form class="booking-form">
+                <div class="form-group">
+                    <label for="check-in">registrarse</label>
+                    <input type="date" id="check-in" name="check-in" required>
+                </div>
+
+                <div class="form-group">
+                    <select name="adults" id="adults" required>
+                        <option value="" disabled selected>adultos</option>
+                        <option value="1">1 Adulto</option>
+                        <option value="2">2 Adultos</option>
+                        <option value="3">3 Adultos</option>
+                        <option value="4">4 Adultos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select name="children" id="children">
+                        <option value="0" selected>niños</option>
+                        <option value="1">1 Niño</option>
+                        <option value="2">2 Niños</option>
+                        <option value="3">3 Niños</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-reservar">reservar ahora</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE EVENTOS -->
+    <main class="events-container">
+        <div class="events-intro">
+            <h2>Información de Eventos</h2>
+            <p>Celebra tus momentos más especiales en Hotel NAAT. Contamos con instalaciones adaptables para conferencias, bodas, banquetes y reuniones sociales con servicios de alta calidad.</p>
+        </div>
+
+        <div class="events-grid" id="events-grid">
+            <!-- Carga dinámica o fallback estático -->
+            <div class="event-card">
+                <div class="event-content">
+                    <h3>Bodas y Celebraciones</h3>
+                    <p>Espacios al aire libre y salones elegantes equipados para crear momentos inolvidables.</p>
+                    <div class="event-meta">
+                        <span>Capacidad: hasta 150 personas</span>
+                    </div>
+                    <a href="contactanos.html" class="btn-cotizar">Cotizar Evento</a>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-content">
+                    <h3>Conferencias y Negocios</h3>
+                    <p>Salones ejecutivos con equipos audiovisuales, pantalla gigante y servicio de catering profesional.</p>
+                    <div class="event-meta">
+                        <span>Capacidad: hasta 80 personas</span>
+                    </div>
+                    <a href="contactanos.html" class="btn-cotizar">Cotizar Evento</a>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-content">
+                    <h3>Eventos Sociales y Cumpleaños</h3>
+                    <p>Piscina y área de jardín perfectas para reuniones familiares, cumpleaños y fiestas privadas.</p>
+                    <div class="event-meta">
+                        <span>Capacidad: hasta 100 personas</span>
+                    </div>
+                    <a href="contactanos.html" class="btn-cotizar">Cotizar Evento</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h4>direccion</h4>
+                <p>calle ....... frente a ...... guayas - ecuador</p>
+            </div>
+            <div class="footer-info">
+                <h4>correo</h4>
+                <p>Hotel.NAATec.@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE LOGIN / REGISTRO -->
+    <div id="auth-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="tabs">
+                <button id="tab-login" class="active">Iniciar Sesión</button>
+                <button id="tab-register">Registrarse</button>
+            </div>
+
+            <form id="form-login" class="auth-form">
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn-reservar">Ingresar</button>
+            </form>
+
+            <form id="form-register" class="auth-form hidden">
+                <div class="input-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="reg-nombre" required>
+                </div>
+                <div class="input-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <button type="submit" class="btn-reservar">Crear Cuenta</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Cargar eventos desde la API si la tabla está poblada
+        document.addEventListener('DOMContentLoaded', async () => {
+            const grid = document.getElementById('events-grid');
+            try {
+                const res = await fetch('/api/eventos');
+                const data = await res.json();
+                if (data.success && data.data.length > 0) {
+                    grid.innerHTML = '';
+                    data.data.forEach(ev => {
+                        const card = document.createElement('div');
+                        card.className = 'event-card';
+                        card.innerHTML = `
+                            ${ev.imagen_url ? `<img src="${ev.imagen_url}" alt="${ev.nombre}">` : ''}
+                            <div class="event-content">
+                                <h3>${ev.nombre}</h3>
+                                <p>${ev.descripcion}</p>
+                                <div class="event-meta">
+                                    <span>Capacidad: hasta ${ev.capacidad} personas</span>
+                                </div>
+                                <a href="contactanos.html" class="btn-cotizar">Cotizar Evento</a>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+                }
+            } catch (err) {
+                console.log('Usando eventos estáticos por defecto.');
+            }
+        });
+    </script>
+</body>
+</html>

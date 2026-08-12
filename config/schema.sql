@@ -43,3 +43,18 @@ INSERT INTO habitaciones (nombre, descripcion, capacidad_adultos, capacidad_nino
 ('Habitación Estándar', 'Cómoda habitación con cama matrimonial y escritorio.', 2, 1, 45.00, 'images/rooms/habitacion-estandar.jpg'),
 ('Suite Ejecutiva', 'Elegante suite con vista y área de trabajo preferencial.', 2, 0, 75.00, 'images/rooms/suite-ejecutiva.jpg'),
 ('Suite Familiar con Vista', 'Amplia suite para toda la familia con vista panorámica.', 4, 2, 110.00, 'images/rooms/suite-familiar.jpg');
+--tabla eventos
+CREATE TABLE IF NOT EXISTS eventos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    capacidad INT,
+    precio_estimado DECIMAL(10,2),
+    imagen_url VARCHAR(255),
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO eventos (nombre, descripcion, capacidad, precio_estimado, imagen_url) VALUES
+('Bodas y Celebraciones', 'Espacios al aire libre y salones elegantes equipados para crear momentos inolvidables.', 150, 500.00, 'assets/images/boda.jpg'),
+('Conferencias y Negocios', 'Salones ejecutivos con equipos audiovisuales, pantalla gigante y servicio de catering profesional.', 80, 300.00, 'assets/images/conferencia.jpg'),
+('Eventos Sociales y Cumpleaños', 'Piscina y área de jardín perfectas para reuniones familiares, cumpleaños y fiestas privadas.', 100, 250.00, 'assets/images/fiesta.jpg');

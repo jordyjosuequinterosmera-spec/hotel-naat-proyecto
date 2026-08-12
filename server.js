@@ -10,6 +10,10 @@ const authRouter = require('./routes/auth'); // <--- NUEVO
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// server.js (Añade esta línea en la sección de rutas)
+const eventosRouter = require('./routes/eventos');
+app.use('/api/eventos', eventosRouter);
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
