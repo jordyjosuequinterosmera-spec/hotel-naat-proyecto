@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel NAAT - Panel de Administración</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 40px auto 60px auto;
+            padding: 0 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header h2 {
+            color: #28a745;
+            font-size: 1.8rem;
+        }
+
+        .btn-logout {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 5px solid #0088cc;
+        }
+
+        .stat-card h4 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .data-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .data-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th, .admin-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.95rem;
+        }
+
+        .admin-table th {
+            background-color: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .badge-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <img src="assets/images/logo.png" alt="Logo Hotel NAAT" class="logo-img" onerror="this.style.display='none'">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">inicio</a></li>
+                    <li><a href="habitaciones.html">habitaciones</a></li>
+                    <li><a href="eventos.html">eventos</a></li>
+                    <li><a href="contactanos.html">contactanos</a></li>
+                    <li><a href="admin.html" class="active" style="color: #0088cc; font-weight: bold;">administrativo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h2>Panel de Control Administrativo</h2>
+            <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+
+        <!-- MÉTICAS Y RESUMEN -->
+        <div class="stats-grid">
+            <div class="stat-card" style="border-left-color: #28a745;">
+                <h4>Reservas Activas</h4>
+                <div class="number" id="total-reservas">3</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #0088cc;">
+                <h4>Eventos Agendados</h4>
+                <div class="number">2</div>
+            </div>
+            <div class="stat-card" style="border-left-color: #ffc107;">
+                <h4>Mensajes de Contacto</h4>
+                <div class="number" id="total-contactos">1</div>
+            </div>
+        </div>
+
+        <!-- TABLA DE RESERVAS -->
+        <section class="data-section">
+            <h3>Reservas Registradas</h3>
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>#ID</th>
+                            <th>Huésped / Usuario</th>
+                            <th>Fecha Registro</th>
+                            <th>Adultos</th>
+                            <th>Niños</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-reservas">
+                        <tr>
+                            <td>#1001</td>
+                            <td>Carlos Mendoza</td>
+                            <td>2026-08-15</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td><span class="badge-status">Confirmada</span></td>
+                        </tr>
+                        <tr>
+                            <td>#1002</td>
+                            <td>María Fernanda Silva</td>
+                            <td>2026-08-20</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td><span class="badge-status">Confirmada</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- TABLA DE MENSAJES DE CONTACTO -->
+        <section class="data-section">
+            <h3>Mensajes de Contacto</h3>
+            <div style="overflow-x: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nombres</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-contactos">
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: #888;">Cargando mensajes...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h4>direccion</h4>
+                <p>calle ....... frente a ...... guayas - ecuador</p>
+            </div>
+            <div class="footer-info">
+                <h4>correo</h4>
+                <p>Hotel.NAATec.@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Verificar sesión activa
+        const session = JSON.parse(localStorage.getItem('adminSession'));
+        if (!session || !session.loggedIn) {
+            window.location.href = 'admin.html';
+        }
+
+        function cerrarSesion() {
+            localStorage.removeItem('adminSession');
+            window.location.href = 'admin.html';
+        }
+
+        // Cargar Contactos desde la API
+        async function cargarContactos() {
+            try {
+                const res = await fetch('/api/contactos');
+                if (res.ok) {
+                    const contactos = await res.json();
+                    const tbody = document.getElementById('tabla-contactos');
+                    if (contactos.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No hay mensajes registrados.</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = contactos.map(c => `
+                        <tr>
+                            <td>${c.nombres} ${c.apellidos}</td>
+                            <td>${c.correo}</td>
+                            <td>${c.telefono || 'N/A'}</td>
+                            <td>${c.comentarios}</td>
+                        </tr>
+                    `).join('');
+                    document.getElementById('total-contactos').textContent = contactos.length;
+                }
+            } catch (err) {
+                console.log('Modo local o sin conexión a API de contactos.');
+            }
+        }
+
+        cargarContactos();
+    </script>
+</body>
+</html>
