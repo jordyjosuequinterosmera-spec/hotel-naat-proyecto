@@ -1,55 +1,31 @@
-// server.js
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
-
-const db = require('./config/db');
-const reservasRouter = require('./routes/reservas');
-const authRouter = require('./routes/auth'); // <--- NUEVO
-
+const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// server.js (Añade esta línea en la sección de rutas)
-const eventosRouter = require('./routes/eventos');
-app.use('/api/eventos', eventosRouter);
-
-// server.js (añadir con las demás rutas)
-const contactosRouter = require('./routes/contactos');
-app.use('/api/contactos', contactosRouter);
-
-// En server.js
-const adminRouter = require('./routes/admin');
-const contactosRouter = require('./routes/contactos');
-
-app.use('/api/admin', adminRouter);
-app.use('/api/contactos', contactosRouter);
-
-// Middlewares
+// 1. MIDDLEWARES PARA PARSEAR BODY
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));
+app.use(express.urlencoded({ extended: true }));
 
-// Rutas API
-app.use('/api/reservas', reservasRouter);
-app.use('/api/auth', authRouter); // <--- NUEVO
+// 2. ARCHIVOS ESTÁTICOS
+app.use(express.static(__dirname));
+// Si los archivos HTML están en la raíz, cambia la línea por:
+// app.use(express.static(__dirname));
 
-app.get('/api/habitaciones', async (req, res) => {
-    try {
-        const [rows] = await db.query('SELECT * FROM habitaciones');
-        res.json({ success: true, data: rows });
-    } catch (error) {
-        console.error('Error al consultar habitaciones:', error);
-        res.status(500).json({ success: false, message: 'Error en el servidor de base de datos' });
-    }
+// 3. RUTAS DE LA API
+const adminRouter = require('./routes/admin');
+app.use('/api/admin', adminRouter);
+
+// Manejador genérico para subrutas no encontradas en /api
+app.use('/api', (req, res) => {
+    res.status(404).json({ success: false, message: 'Ruta API no encontrada' });
 });
 
-app.listen(PORT, async () => {
+// 4. INICIAR SERVIDOR
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`=================================`);
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
-    try {
-        await db.query('SELECT 1');
-        console.log('Conexión exitosa a la base de datos MySQL');
-    } catch (err) {
-        console.error('No se pudo conectar a MySQL:', err.message);
-    }
+    console.log(`=================================`);
 });

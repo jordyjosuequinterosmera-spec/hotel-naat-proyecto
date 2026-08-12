@@ -1,218 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotel NAAT - Panel Administrativo</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css" />
     <style>
-        .dashboard-container { max-width: 1100px; margin: 40px auto 60px auto; padding: 0 20px; }
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e0e0e0; padding-bottom: 15px; margin-bottom: 30px; }
-        .dashboard-header h2 { color: #28a745; font-size: 1.8rem; }
-        .btn-logout { background-color: #dc3545; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .stat-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 5px solid #0088cc; }
-        .stat-card h4 { color: #666; font-size: 0.9rem; margin-bottom: 8px; }
-        .stat-card .number { font-size: 2rem; font-weight: bold; color: #333; }
-        .data-section { background: #fff; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 30px; }
-        .data-section h3 { margin-bottom: 20px; color: #333; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-        .admin-table { width: 100%; border-collapse: collapse; }
-        .admin-table th, .admin-table td { text-align: left; padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 0.95rem; }
-        .admin-table th { background-color: #f8f9fa; color: #555; font-weight: 600; }
-        .badge-status { padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: bold; background-color: #e3f2fd; color: #0d47a1; }
+      .dashboard-container {
+        max-width: 1100px;
+        margin: 40px auto 60px auto;
+        padding: 0 20px;
+      }
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+      .dashboard-header h2 {
+        color: #28a745;
+        font-size: 1.8rem;
+      }
+      .btn-logout {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+      }
+      .stat-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-left: 5px solid #0088cc;
+      }
+      .stat-card h4 {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+      }
+      .stat-card .number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+      }
+      .data-section {
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+      }
+      .data-section h3 {
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+      }
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .admin-table th,
+      .admin-table td {
+        text-align: left;
+        padding: 12px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 0.95rem;
+      }
+      .admin-table th {
+        background-color: #f8f9fa;
+        color: #555;
+        font-weight: 600;
+      }
+      .badge-status {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        background-color: #e3f2fd;
+        color: #0d47a1;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <header class="main-header">
-        <div class="header-container">
-            <div class="logo-wrapper">
-                <img src="assets/images/logo.png" alt="Logo Hotel NAAT" class="logo-img" onerror="this.style.display='none'">
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="index.html">inicio</a></li>
-                    <li><a href="habitaciones.html">habitaciones</a></li>
-                    <li><a href="eventos.html">eventos</a></li>
-                    <li><a href="contactanos.html">contactanos</a></li>
-                    <li><a href="admin.html" class="active" style="color: #0088cc; font-weight: bold;">administrativo</a></li>
-                </ul>
-            </nav>
+      <div class="header-container">
+        <div class="logo-wrapper">
+          <img
+            src="assets/images/logo.png"
+            alt="Logo Hotel NAAT"
+            class="logo-img"
+            onerror="this.style.display = 'none'"
+          />
         </div>
+        <nav class="main-nav">
+          <ul>
+            <li><a href="index.html">inicio</a></li>
+            <li><a href="habitaciones.html">habitaciones</a></li>
+            <li><a href="eventos.html">eventos</a></li>
+            <li><a href="contactanos.html">contactanos</a></li>
+            <li>
+              <a
+                href="admin.html"
+                class="active"
+                style="color: #0088cc; font-weight: bold"
+                >administrativo</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main class="dashboard-container">
-        <div class="dashboard-header">
-            <h2>Panel de Control Administrativo</h2>
-            <div>
-                <span id="welcome-user" style="margin-right: 15px; font-weight: 500;"></span>
-                <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
-            </div>
+      <div class="dashboard-header">
+        <h2>Panel de Control Administrativo</h2>
+        <div>
+          <span
+            id="welcome-user"
+            style="margin-right: 15px; font-weight: 500"
+          ></span>
+          <button class="btn-logout" onclick="cerrarSesion()">
+            Cerrar Sesión
+          </button>
         </div>
+      </div>
 
-        <!-- TARJETAS DE MÉTRICAS -->
-        <div class="stats-grid">
-            <div class="stat-card" style="border-left-color: #28a745;">
-                <h4>Reservas Registradas</h4>
-                <div class="number" id="stat-reservas">0</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #0088cc;">
-                <h4>Eventos Solicitados</h4>
-                <div class="number" id="stat-eventos">0</div>
-            </div>
-            <div class="stat-card" style="border-left-color: #ffc107;">
-                <h4>Mensajes de Contacto</h4>
-                <div class="number" id="stat-contactos">0</div>
-            </div>
+      <!-- TARJETAS DE MÉTRICAS -->
+      <div class="stats-grid">
+        <div class="stat-card" style="border-left-color: #28a745">
+          <h4>Reservas Registradas</h4>
+          <div class="number" id="stat-reservas">0</div>
         </div>
+        <div class="stat-card" style="border-left-color: #0088cc">
+          <h4>Eventos Solicitados</h4>
+          <div class="number" id="stat-eventos">0</div>
+        </div>
+        <div class="stat-card" style="border-left-color: #ffc107">
+          <h4>Mensajes de Contacto</h4>
+          <div class="number" id="stat-contactos">0</div>
+        </div>
+      </div>
 
-        <!-- TABLA DE RESERVAS -->
-        <section class="data-section">
-            <h3>Reservas en Sistema (MySQL)</h3>
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>#ID</th>
-                            <th>Huésped</th>
-                            <th>Correo</th>
-                            <th>Check-in</th>
-                            <th>Adultos / Niños</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-reservas">
-                        <tr><td colspan="6" style="text-align:center;">Cargando reservas...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+      <!-- TABLA DE RESERVAS -->
+      <section class="data-section">
+        <h3>Reservas en Sistema (MySQL)</h3>
+        <div style="overflow-x: auto">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#ID</th>
+                <th>Huésped</th>
+                <th>Correo</th>
+                <th>Check-in</th>
+                <th>Adultos / Niños</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-reservas">
+              <tr>
+                <td colspan="6" style="text-align: center">
+                  Cargando reservas...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <!-- TABLA DE EVENTOS -->
-        <section class="data-section">
-            <h3>Eventos y Cotizaciones (MySQL)</h3>
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Evento</th>
-                            <th>Cliente</th>
-                            <th>Correo</th>
-                            <th>Fecha</th>
-                            <th>Asistentes</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-eventos">
-                        <tr><td colspan="6" style="text-align:center;">Cargando eventos...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+      <!-- TABLA DE EVENTOS -->
+      <section class="data-section">
+        <h3>Eventos y Cotizaciones (MySQL)</h3>
+        <div style="overflow-x: auto">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Evento</th>
+                <th>Cliente</th>
+                <th>Correo</th>
+                <th>Fecha</th>
+                <th>Asistentes</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-eventos">
+              <tr>
+                <td colspan="6" style="text-align: center">
+                  Cargando eventos...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <!-- TABLA DE CONTACTOS -->
-        <section class="data-section">
-            <h3>Mensajes de Contacto Recibidos (MySQL)</h3>
-            <div style="overflow-x: auto;">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Nombres</th>
-                            <th>Correo</th>
-                            <th>Teléfono</th>
-                            <th>Mensaje / Comentario</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabla-contactos">
-                        <tr><td colspan="4" style="text-align:center;">Cargando contactos...</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+      <!-- TABLA DE CONTACTOS -->
+      <section class="data-section">
+        <h3>Mensajes de Contacto Recibidos (MySQL)</h3>
+        <div style="overflow-x: auto">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nombres</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Mensaje / Comentario</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-contactos">
+              <tr>
+                <td colspan="4" style="text-align: center">
+                  Cargando contactos...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
 
     <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-info">
-                <h4>direccion</h4>
-                <p>calle ....... frente a ...... guayas - ecuador</p>
-            </div>
-            <div class="footer-info">
-                <h4>correo</h4>
-                <p>Hotel.NAATec.@gmail.com</p>
-            </div>
+      <div class="footer-container">
+        <div class="footer-info">
+          <h4>direccion</h4>
+          <p>calle ....... frente a ...... guayas - ecuador</p>
         </div>
+        <div class="footer-info">
+          <h4>correo</h4>
+          <p>Hotel.NAATec.@gmail.com</p>
+        </div>
+      </div>
     </footer>
 
     <script>
-        // Validar sesión
-        const session = JSON.parse(localStorage.getItem('adminSession'));
-        if (!session || !session.loggedIn) {
-            window.location.href = 'admin.html';
-        } else {
-            document.getElementById('welcome-user').textContent = `Bienvenido, ${session.admin.nombre || session.admin.usuario}`;
-        }
+      // Validar sesión
+      const session = JSON.parse(localStorage.getItem("adminSession"));
+      if (!session || !session.loggedIn) {
+        window.location.href = "admin.html";
+      } else {
+        document.getElementById("welcome-user").textContent =
+          `Bienvenido, ${session.admin.nombre || session.admin.usuario}`;
+      }
 
-        function cerrarSesion() {
-            localStorage.removeItem('adminSession');
-            window.location.href = 'admin.html';
-        }
+      function cerrarSesion() {
+        localStorage.removeItem("adminSession");
+        window.location.href = "admin.html";
+      }
 
-        // Cargar todos los datos desde el backend
-        async function cargarDashboard() {
-            try {
-                const res = await fetch('/api/admin/dashboard-data');
-                const data = await res.json();
+      // Cargar todos los datos desde el backend
+      async function cargarDashboard() {
+        try {
+          const res = await fetch("/api/admin/dashboard-data");
+          const data = await res.json();
 
-                if (data.success) {
-                    // Métricas
-                    document.getElementById('stat-reservas').textContent = data.stats.totalReservas;
-                    document.getElementById('stat-eventos').textContent = data.stats.totalEventos;
-                    document.getElementById('stat-contactos').textContent = data.stats.totalContactos;
+          if (data.success) {
+            // 1. Actualizar Contadores
+            document.getElementById("stat-reservas").textContent =
+              data.stats.totalReservas || 0;
+            document.getElementById("stat-eventos").textContent =
+              data.stats.totalEventos || 0;
+            document.getElementById("stat-contactos").textContent =
+              data.stats.totalContactos || 0;
 
-                    // Reservas
-                    const tbodyRes = document.getElementById('tabla-reservas');
-                    tbodyRes.innerHTML = data.reservas.length ? data.reservas.map(r => `
+            // 2. Renderizar Reservas
+            const tbodyRes = document.getElementById("tabla-reservas");
+            if (data.reservas && data.reservas.length > 0) {
+              tbodyRes.innerHTML = data.reservas
+                .map((r) => {
+                  // Detectar la fecha correctamente según el nombre de la columna en BD
+                  const rawFecha =
+                    r.fecha_checkin || r.fecha_inicio || r.creado_en;
+                  const fecha = rawFecha
+                    ? String(rawFecha).split("T")[0]
+                    : "N/A";
+
+                  const adultos = r.adultos !== undefined ? r.adultos : 1;
+                  const ninos = r.ninos !== undefined ? r.ninos : 0;
+
+                  return `
                         <tr>
                             <td>#${r.id}</td>
-                            <td>${r.huesped_nombre}</td>
+                            <td>${r.huesped_nombre} <br><small style="color:#666;">(${r.habitacion_nombre})</small></td>
                             <td>${r.huesped_correo}</td>
-                            <td>${new Date(r.fecha_checkin).toLocaleDateString()}</td>
-                            <td>${r.adultos} Ad / ${r.ninos} Ni</td>
-                            <td><span class="badge-status">${r.estado}</span></td>
+                            <td>${fecha}</td>
+                            <td>${adultos} Ad / ${ninos} Ni</td>
+                            <td><span class="badge-status">${r.estado || "Confirmada"}</span></td>
                         </tr>
-                    `).join('') : '<tr><td colspan="6" style="text-align:center;">No hay reservas registradas.</td></tr>';
-
-                    // Eventos
-                    const tbodyEv = document.getElementById('tabla-eventos');
-                    tbodyEv.innerHTML = data.eventos.length ? data.eventos.map(e => `
-                        <tr>
-                            <td><strong>${e.tipo_evento}</strong></td>
-                            <td>${e.nombre_cliente}</td>
-                            <td>${e.correo}</td>
-                            <td>${new Date(e.fecha_evento).toLocaleDateString()}</td>
-                            <td>${e.num_asistentes} pers.</td>
-                            <td><span class="badge-status">${e.estado}</span></td>
-                        </tr>
-                    `).join('') : '<tr><td colspan="6" style="text-align:center;">No hay eventos agendados.</td></tr>';
-
-                    // Contactos
-                    const tbodyCt = document.getElementById('tabla-contactos');
-                    tbodyCt.innerHTML = data.contactos.length ? data.contactos.map(c => `
-                        <tr>
-                            <td>${c.nombres} ${c.apellidos}</td>
-                            <td>${c.correo}</td>
-                            <td>${c.telefono || 'N/A'}</td>
-                            <td>${c.comentarios}</td>
-                        </tr>
-                    `).join('') : '<tr><td colspan="4" style="text-align:center;">No hay mensajes registrados.</td></tr>';
-                }
-            } catch (err) {
-                console.error('Error al cargar datos del dashboard:', err);
+                    `;
+                })
+                .join("");
+            } else {
+              tbodyRes.innerHTML =
+                '<tr><td colspan="6" style="text-align:center;">No hay reservas registradas.</td></tr>';
             }
-        }
 
-        cargarDashboard();
+            // 3. Renderizar Eventos
+            const tbodyEv = document.getElementById("tabla-eventos");
+            if (tbodyEv) {
+              if (data.eventos && data.eventos.length > 0) {
+                tbodyEv.innerHTML = data.eventos
+                  .map(
+                    (e) => `
+                        <tr>
+                            <td><strong>${e.tipo_evento || "Evento"}</strong></td>
+                            <td>${e.nombre_cliente || "N/A"}</td>
+                            <td>${e.correo || "N/A"}</td>
+                            <td>${e.fecha_evento ? String(e.fecha_evento).split("T")[0] : "N/A"}</td>
+                            <td>${e.num_asistentes || 0} pers.</td>
+                            <td><span class="badge-status">${e.estado || "Pendiente"}</span></td>
+                        </tr>
+                    `,
+                  )
+                  .join("");
+              } else {
+                tbodyEv.innerHTML =
+                  '<tr><td colspan="6" style="text-align:center;">No hay eventos agendados.</td></tr>';
+              }
+            }
+
+            // 4. Renderizar Contactos
+            const tbodyCt = document.getElementById("tabla-contactos");
+            if (tbodyCt) {
+              if (data.contactos && data.contactos.length > 0) {
+                tbodyCt.innerHTML = data.contactos
+                  .map(
+                    (c) => `
+                        <tr>
+                            <td>${c.nombres || ""} ${c.apellidos || ""}</td>
+                            <td>${c.correo || "N/A"}</td>
+                            <td>${c.telefono || "N/A"}</td>
+                            <td>${c.comentarios || c.mensaje || ""}</td>
+                        </tr>
+                    `,
+                  )
+                  .join("");
+              } else {
+                tbodyCt.innerHTML =
+                  '<tr><td colspan="4" style="text-align:center;">No hay mensajes registrados.</td></tr>';
+              }
+            }
+          }
+        } catch (err) {
+          console.error("Error al cargar datos del dashboard:", err);
+        }
+      }
+
+      // Ejecutar al cargar la página
+      document.addEventListener("DOMContentLoaded", cargarDashboard);
+
+      cargarDashboard();
     </script>
-</body>
+  </body>
 </html>
