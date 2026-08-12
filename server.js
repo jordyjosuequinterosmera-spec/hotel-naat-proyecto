@@ -18,6 +18,13 @@ app.use('/api/eventos', eventosRouter);
 const contactosRouter = require('./routes/contactos');
 app.use('/api/contactos', contactosRouter);
 
+// En server.js
+const adminRouter = require('./routes/admin');
+const contactosRouter = require('./routes/contactos');
+
+app.use('/api/admin', adminRouter);
+app.use('/api/contactos', contactosRouter);
+
 // Middlewares
 app.use(cors());
 app.use(express.json());
